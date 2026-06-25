@@ -100,7 +100,7 @@
 
 .age-input__number {
   flex: 1;
-  height: 48px;
+  height: 44px;
   padding: 0 var(--space-16);
   font-family: var(--type-font-main);
   font-size: var(--type-scale-16);
