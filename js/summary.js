@@ -28,7 +28,15 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  document.getElementById("summary-age").textContent = `Child age: ${data.ageLabel}`;
+  let displayAge = data.ageLabel;
+  const userAgeStored = localStorage.getItem("mdt-user-age");
+  if (userAgeStored) {
+    try {
+      const { label } = JSON.parse(userAgeStored);
+      if (label) displayAge = label;
+    } catch (e) {}
+  }
+  document.getElementById("summary-age").textContent = `Child age: ${displayAge}`;
 
   const saved = localStorage.getItem(`mdt-answers-${age}`);
   const answers = saved ? JSON.parse(saved) : {};
