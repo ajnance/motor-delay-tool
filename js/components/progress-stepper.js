@@ -80,7 +80,10 @@ function initProgressStepper(options = {}) {
 
     const activeStep = steps.find(s => s.id === activeId);
     const dropdownSelect = document.getElementById("stepper-select");
-    dropdownSelect.innerHTML = activeSteps.map(id => {
+    const dropdownIds = steps
+      .filter(s => activeSteps.includes(s.id) || (onStepClick && (s.id === "summary" || s.id === "start")))
+      .map(s => s.id);
+    dropdownSelect.innerHTML = dropdownIds.map(id => {
       const step = steps.find(s => s.id === id);
       return `<option value="${id}" ${id === activeId ? "selected" : ""}>${step ? step.label : id}</option>`;
     }).join("");
@@ -123,10 +126,13 @@ function initProgressStepper(options = {}) {
   document.getElementById("mobile-next").addEventListener("click", () => navigate(1));
 
   document.getElementById("stepper-select").addEventListener("change", (e) => {
-    const idx = activeSteps.indexOf(e.target.value);
+    const stepId = e.target.value;
+    const idx = activeSteps.indexOf(stepId);
     if (idx !== -1) {
       currentIndex = idx;
       onStepChange(currentIndex);
+    } else if (onStepClick) {
+      onStepClick(stepId);
     }
   });
 

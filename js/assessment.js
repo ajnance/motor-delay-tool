@@ -158,7 +158,15 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  document.getElementById("hero-subtitle").textContent = `Reviewing skills for age: ${data.ageLabel}`;
+  let displayAge = data.ageLabel;
+  const userAgeStored = localStorage.getItem("mdt-user-age");
+  if (userAgeStored) {
+    try {
+      const { value, unit } = JSON.parse(userAgeStored);
+      displayAge = `${value} ${unit}`;
+    } catch (e) {}
+  }
+  document.getElementById("hero-subtitle").textContent = `Reviewing skills for age: ${displayAge}`;
 
   loadAnswers();
   renderSection();
