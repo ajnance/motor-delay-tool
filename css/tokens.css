@@ -1,0 +1,92 @@
+:root {
+  /* Typography */
+  --type-font-main: "Area", sans-serif;
+  --type-font-alt: "Area", sans-serif;
+
+  --type-scale-12: 12px;
+  --type-scale-14: 14px;
+  --type-scale-16: 16px;
+  --type-scale-18: 18px;
+  --type-scale-20: 20px;
+  --type-scale-24: 24px;
+  --type-scale-28: 28px;
+  --type-scale-32: 32px;
+  --type-scale-36: 36px;
+  --type-scale-40: 40px;
+  --type-scale-48: 48px;
+
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --line-height-tight: 1.25;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.75;
+
+  /* Spacing */
+  --space-2: 2px;
+  --space-4: 4px;
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-24: 24px;
+  --space-32: 32px;
+  --space-40: 40px;
+  --space-48: 48px;
+  --space-56: 56px;
+  --space-64: 64px;
+  --space-72: 72px;
+  --space-104: 104px;
+  --space-120: 120px;
+
+  /* Layout */
+  --breakpoints-width: 1440px;
+  --space-padding-block-h: 64px;
+  --space-padding-block-v: 64px;
+  --space-gap-block-content-h: 32px;
+  --space-gap-block-content-v: 32px;
+
+  /* Colors — Brand */
+  --adage-palette-adage-black: #130b2d;
+  --adage-palette-adage-blue: #1578d0;
+  --adage-palette-adage-dark-blue-4: #00065c;
+  --adage-palette-adage-dark-blue-1: #0238aa;
+  --adage-palette-adage-light-blue-2: #b7dcfb;
+  --adage-palette-adage-light-blue-1: #dcefff;
+  --adage-palette-adage-light-grey: #dadfeb;
+  --adage-palette-adage-dark-grey: #51617e;
+  --adage-palette-adage-green: #20bf55;
+
+  /* Colors — Semantic */
+  --background-default: #fefefe;
+  --background-subtle: #e4e3e6;
+  --background-muted: #c3c1c9;
+  --background-inverse: #040404;
+  --background-color1-1: #1578d0;
+  --background-color1-2: #0238aa;
+  --background-overlay: rgba(28, 21, 53, 0.6);
+
+  --text-body-default: #1c1535;
+  --text-body-muted: #6a6677;
+  --text-body-link: #040404;
+  --text-body-link-hover: #1578d0;
+  --text-headings-default: #1c1535;
+  --text-headings-alt: #fefefe;
+
+  --border-base: #040404;
+  --border-neutral: #423c57;
+  --border-neutral-muted: #898596;
+  --border-focus: #1c1535;
+  --border-s: 1px;
+  --border-m: 2px;
+  --border-l: 3px;
+
+  /* Alert */
+  --alert-good: #ccffdd;
+  --alert-general: #dcefff;
+  --alert-negative: #ffdcdc;
+  --alert-requirement: #ff3f3f;
+  --alert-caution: #fff7dc;
+}

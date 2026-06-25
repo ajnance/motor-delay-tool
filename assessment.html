@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assessment | Motor Delay Tool</title>
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/assessment.css">
+</head>
+<body>
+  <div class="page">
+
+    <div id="site-header"></div>
+
+    <div class="page__content">
+      <section class="hero hero--assessment">
+        <div class="hero__inner">
+          <h1 class="hero__title">Motor Delay Tool</h1>
+          <p class="hero__subtitle" id="hero-subtitle">Reviewing skills for age: 18 months</p>
+          <p class="hero__desc">Answer each question about your child's current motor skills. If you are unsure, select Unsure and we'll include it in your list to monitor or discuss with your pediatrician. Notes for your pediatrician will be added to your summary.</p>
+        </div>
+      </section>
+
+      <div id="progress-stepper"></div>
+
+      <div class="assessment" id="assessment-content"></div>
+    </div>
+
+    <div id="site-footer"></div>
+
+  </div>
+
+  <script src="js/components/site-header.js"></script>
+  <script src="js/components/site-footer.js"></script>
+  <script src="js/components/progress-stepper.js"></script>
+  <script>
+    document.getElementById("site-header").outerHTML = renderSiteHeader("");
+    document.getElementById("site-footer").outerHTML = renderSiteFooter("");
+    document.getElementById("progress-stepper").outerHTML = renderProgressStepper("");
+  </script>
+  <script src="js/assessment-data.js"></script>
+  <script src="js/assessment.js"></script>
+</body>
+</html>

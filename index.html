@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Motor Delay Tool | HealthyChildren.org</title>
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/layout.css">
+</head>
+<body>
+  <div class="page">
+
+    <div id="site-header"></div>
+
+    <div class="page__content">
+      <div id="page-hero"></div>
+
+      <main class="main">
+        <div class="main__body">
+          <h2>Before You Begin</h2>
+          <p>Motor skills are how children use their bodies to move and interact with the world. This includes things like sitting, walking, running, climbing, using their hands, and picking up small objects.</p>
+          <p>Children develop at different rates, but identifying motor delays early can help your child get support sooner. <strong>This tool does not provide a diagnosis, but will help you create a list of concerns and observations to discuss with your pediatrician.</strong></p>
+
+          <div class="main__note">
+            <p><strong>Note:</strong> Your progress is saved in this browser as you go. You can leave and come back later to continue your skill check if needed. This information is not sent to the American Academy of Pediatrics or any third party organizations.</p>
+          </div>
+
+          <div class="main__disclaimer">
+            <p>This tool was developed through the support of cooperative agreement #5NU38OT000282 between the <a href="#">American Academy of Pediatrics</a> and the Centers for Disease Control and Prevention&rsquo;s <a href="#">National Center on Birth Defects and Developmental Disabilities</a>.</p>
+          </div>
+        </div>
+
+        <aside class="sidebar">
+          <div class="card" id="card-new">
+            <p class="card__title">What is your child&rsquo;s age?</p>
+            <div class="age-input">
+              <input type="number" id="age-number" class="age-input__number" min="1" max="60" placeholder="">
+              <select id="age-unit" class="age-input__unit">
+                <option value="months">Months</option>
+                <option value="years">Years</option>
+              </select>
+            </div>
+            <button id="start-btn" class="btn btn--primary btn--m" disabled>Start My Skills Check</button>
+          </div>
+          <div class="card card--welcome-back" id="card-resume" style="display:none;">
+            <h3 class="card__title">Welcome back!</h3>
+            <p class="card__desc" id="resume-desc">You have a motor skills check in progress.</p>
+            <p class="card__desc">Continue where you left off, or clear your saved answers to start a new review.</p>
+            <div class="card__actions">
+              <button class="btn btn--m btn--outline" id="btn-start-new">Start New Skills Check</button>
+              <button class="btn btn--m btn--filled" id="btn-continue">Continue Skills Check</button>
+            </div>
+          </div>
+        </aside>
+      </main>
+    </div>
+
+    <div id="site-footer"></div>
+
+  </div>
+
+  <script src="js/components/site-header.js"></script>
+  <script src="js/components/site-footer.js"></script>
+  <script src="js/components/page-hero.js"></script>
+  <script>
+    document.getElementById("site-header").outerHTML = renderSiteHeader("");
+    document.getElementById("site-footer").outerHTML = renderSiteFooter("");
+    document.getElementById("page-hero").outerHTML = renderPageHero({
+      title: "Motor Delay Tool",
+      description: "Concerned about your child’s development? The Motor Delay Tool will help you check your child’s skills and create a summary you can share with their pediatrician.",
+    });
+  </script>
+  <script src="js/app.js"></script>
+</body>
+</html>

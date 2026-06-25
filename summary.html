@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Summary | Motor Delay Tool</title>
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/assessment.css">
+  <link rel="stylesheet" href="css/summary.css">
+</head>
+<body>
+  <div class="page">
+
+    <div id="site-header"></div>
+
+    <div class="page__content">
+      <section class="hero hero--assessment">
+        <div class="hero__inner">
+          <h1 class="hero__title">Motor Delay Tool</h1>
+          <p class="hero__subtitle"><strong>Skill Check Summary</strong></p>
+          <p class="hero__desc">This summary is based on your skill check responses. Call your pediatrician's office to ask when your child should be seen for an evaluation. Save this summary and take it with you to your child's appointment.</p>
+          <div class="hero__tip">
+            <img class="hero__tip-icon" src="assets/video-regular-full.svg" alt="">
+            <span><strong>Tip:</strong> It's also helpful to record and save videos of specific concerns to share with your pediatrician.</span>
+          </div>
+        </div>
+      </section>
+
+      <div id="progress-stepper"></div>
+
+      <div class="summary" id="summary-content">
+        <div class="summary__main">
+          <div class="summary__header">
+            <h2 class="summary__title">Motor Delay Tool Skill Check Summary</h2>
+            <p class="summary__age" id="summary-age">Child age: 18 months</p>
+          </div>
+          <div id="summary-skills"></div>
+        </div>
+        <aside class="summary__sidebar">
+          <div class="summary__actions">
+            <button class="btn btn--m btn--filled" id="btn-download">Download Summary</button>
+            <button class="btn btn--m btn--outline" id="btn-new-check">Start New Skills Check</button>
+            <p class="summary__actions-note">Starting a new skills check will reset all questions to unanswered and do not use this summary.</p>
+          </div>
+          <h3 class="summary__sidebar-title">Additional Resources</h3>
+          <ul class="summary__resources" id="summary-resources">
+            <li><a href="#">Placeholder resource link</a></li>
+            <li><a href="#">Placeholder resource link</a></li>
+            <li><a href="#">Placeholder resource link</a></li>
+            <li><a href="#">Placeholder resource link</a></li>
+            <li><a href="#">Placeholder resource link</a></li>
+            <li><a href="#">Placeholder resource link</a></li>
+            <li><a href="#">Placeholder resource link</a></li>
+            <li><a href="#">Placeholder resource link</a></li>
+          </ul>
+        </aside>
+      </div>
+    </div>
+
+    <div id="site-footer"></div>
+
+  </div>
+
+  <script src="js/components/site-header.js"></script>
+  <script src="js/components/site-footer.js"></script>
+  <script src="js/components/progress-stepper.js"></script>
+  <script>
+    document.getElementById("site-header").outerHTML = renderSiteHeader("");
+    document.getElementById("site-footer").outerHTML = renderSiteFooter("");
+    document.getElementById("progress-stepper").outerHTML = renderProgressStepper("");
+  </script>
+  <script src="js/assessment-data.js"></script>
+  <script src="js/summary.js"></script>
+</body>
+</html>
