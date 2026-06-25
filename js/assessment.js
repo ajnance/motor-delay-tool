@@ -162,8 +162,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const userAgeStored = localStorage.getItem("mdt-user-age");
   if (userAgeStored) {
     try {
-      const { value, unit } = JSON.parse(userAgeStored);
-      displayAge = `${value} ${unit}`;
+      const { label } = JSON.parse(userAgeStored);
+      if (label) displayAge = label;
     } catch (e) {}
   }
   document.getElementById("hero-subtitle").textContent = `Reviewing skills for age: ${displayAge}`;

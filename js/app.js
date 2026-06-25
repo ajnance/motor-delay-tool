@@ -1,22 +1,25 @@
 document.addEventListener("DOMContentLoaded", () => {
   const cardNew = document.getElementById("card-new");
   const cardResume = document.getElementById("card-resume");
-  const ageNumber = document.getElementById("age-number");
-  const ageUnit = document.getElementById("age-unit");
+  const ageYearsInput = document.getElementById("age-years");
+  const ageMonthsInput = document.getElementById("age-months");
   const startBtn = document.getElementById("start-btn");
 
   const AGE_BRACKETS = [2, 4, 6, 9, 12, 15, 18, 24, 30, 36, 48, 60];
 
-  function getAgeCode() {
-    const val = parseFloat(ageNumber.value);
-    if (!val || val <= 0) return null;
+  function getTotalMonths() {
+    const years = parseFloat(ageYearsInput.value) || 0;
+    const months = parseFloat(ageMonthsInput.value) || 0;
+    return Math.round(years * 12) + Math.round(months);
+  }
 
-    const months = ageUnit.value === "years" ? Math.round(val * 12) : Math.round(val);
-    if (months < 2 || months > 60) return null;
+  function getAgeCode() {
+    const total = getTotalMonths();
+    if (total < 2 || total > 60) return null;
 
     let bracket = AGE_BRACKETS[0];
     for (const b of AGE_BRACKETS) {
-      if (b <= months) bracket = b;
+      if (b <= total) bracket = b;
       else break;
     }
     return bracket + "m";
@@ -36,11 +39,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const userAge = localStorage.getItem("mdt-user-age");
     if (userAge) {
       try {
-        const { value, unit } = JSON.parse(userAge);
-        const label = unit === "years"
-          ? `${value} ${value === 1 ? "year" : "year"}`
-          : `${value} ${value === 1 ? "month" : "month"}`;
-        ageDisplay = label;
+        const { label } = JSON.parse(userAge);
+        if (label) ageDisplay = label;
       } catch (e) {}
     }
     document.getElementById("resume-desc").innerHTML =
@@ -60,16 +60,21 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  if (ageNumber && startBtn) {
-    ageNumber.addEventListener("input", updateStartBtn);
-    ageUnit.addEventListener("change", updateStartBtn);
+  if (ageYearsInput && startBtn) {
+    ageYearsInput.addEventListener("input", updateStartBtn);
+    ageMonthsInput.addEventListener("input", updateStartBtn);
 
     startBtn.addEventListener("click", () => {
       const code = getAgeCode();
       if (code) {
-        const val = parseFloat(ageNumber.value);
-        const unit = ageUnit.value;
-        localStorage.setItem("mdt-user-age", JSON.stringify({ value: val, unit }));
+        const total = getTotalMonths();
+        const years = Math.floor(total / 12);
+        const months = total % 12;
+        let label;
+        if (years > 0 && months > 0) label = `${years} year${years !== 1 ? "s" : ""} ${months} month${months !== 1 ? "s" : ""}`;
+        else if (years > 0) label = `${years} year${years !== 1 ? "s" : ""}`;
+        else label = `${months} month${months !== 1 ? "s" : ""}`;
+        localStorage.setItem("mdt-user-age", JSON.stringify({ label }));
         window.location.href = `assessment.html?age=${encodeURIComponent(code)}`;
       }
     });

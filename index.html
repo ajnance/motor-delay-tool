@@ -35,11 +35,14 @@
           <div class="card" id="card-new">
             <p class="card__title">What is your child&rsquo;s age?</p>
             <div class="age-input">
-              <input type="number" id="age-number" class="age-input__number" min="1" max="60" placeholder="">
-              <select id="age-unit" class="age-input__unit">
-                <option value="months">Months</option>
-                <option value="years">Years</option>
-              </select>
+              <div class="age-input__field">
+                <label class="age-input__label" for="age-years">Years</label>
+                <input type="number" id="age-years" class="age-input__number" min="0" max="5" placeholder="">
+              </div>
+              <div class="age-input__field">
+                <label class="age-input__label" for="age-months">Months</label>
+                <input type="number" id="age-months" class="age-input__number" min="0" max="11" placeholder="">
+              </div>
             </div>
             <button id="start-btn" class="btn btn--primary btn--m" disabled>Start My Skills Check</button>
           </div>

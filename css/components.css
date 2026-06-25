@@ -80,8 +80,22 @@
 /* --- Age Input --- */
 .age-input {
   display: flex;
-  gap: var(--space-8);
+  gap: var(--space-16);
   margin-bottom: var(--space-16);
+}
+
+.age-input__field {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.age-input__label {
+  font-family: var(--type-font-main);
+  font-size: var(--type-scale-14);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-body-default);
 }
 
 .age-input__number {
