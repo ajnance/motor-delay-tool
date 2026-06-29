@@ -42,12 +42,20 @@ document.addEventListener("DOMContentLoaded", () => {
     const savedNotes = answers[key]?.notes || "";
     const infoIcon = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><circle cx="12" cy="8" r="0.5" fill="currentColor"/></svg>`;
 
-    const options = [
-      { value: "can-do", label: "Can do this" },
-      { value: "does-not", label: "Does not do this" },
-      { value: "used-to", label: "Used to do but no longer does" },
-      { value: "unsure", label: "Unsure" }
-    ];
+    const isConcern = sectionId === "concerns";
+
+    const options = isConcern
+      ? [
+          { value: "has-concern", label: "I have this concern" },
+          { value: "no-concern", label: "I do not have this concern" },
+          { value: "unsure", label: "Unsure" }
+        ]
+      : [
+          { value: "can-do", label: "Can do this" },
+          { value: "does-not", label: "Does not do this" },
+          { value: "used-to", label: "Used to do but no longer does" },
+          { value: "unsure", label: "Unsure" }
+        ];
 
     const optionsHtml = options.map(opt => `
       <label class="radio-option">
@@ -56,12 +64,15 @@ document.addEventListener("DOMContentLoaded", () => {
       </label>`).join("");
 
     const placeholderSvg = `<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#b0aeb5" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>`;
+    const rightContent = isConcern
+      ? `<img src="assets/eye.svg" alt="" class="skill-card__icon">`
+      : `<div class="image-placeholder">${placeholderSvg}</div>`;
 
     return `
       <div class="skill-card" data-skill="${key}">
         <div class="skill-card__layout">
           <div class="skill-card__left">
-            <h4 class="skill-card__title">Skill: <span>${skill.name}</span></h4>
+            <h4 class="skill-card__title">${isConcern ? "Concern" : "Skill"}: <span>${skill.name}</span></h4>
             <p class="skill-card__desc">${skill.description}</p>
             <p class="skill-card__tryit"><strong>Try it:</strong> ${skill.tryIt}</p>
             <div class="skill-card__options">
@@ -73,9 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
           </div>
           <div class="skill-card__right">
-            <div class="image-placeholder">
-              ${placeholderSvg}
-            </div>
+            ${rightContent}
           </div>
         </div>
       </div>`;
@@ -87,9 +96,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const skillCards = section.skills.map(skill => renderSkillCard(skill, section.id)).join("");
 
+    const savedConcernNotes = answers[`${section.id}__additional-notes`]?.notes || "";
+    const additionalNotesHtml = section.id === "concerns" ? `
+      <div class="skill-card concern-additional-notes">
+        <h4 class="skill-card__title">Additional Concern Notes for the Pediatrician</h4>
+        <p class="skill-card__desc">Use this space to share any other concerns about your child's movement or development that you'd like your pediatrician to know about.</p>
+        <textarea class="skill-card__notes" data-key="${section.id}__additional-notes" placeholder="Add any additional notes here...">${savedConcernNotes}</textarea>
+      </div>` : "";
+
     container.innerHTML = `
       <h2 class="assessment__section-title">${section.title}</h2>
       ${skillCards}
+      ${additionalNotesHtml}
       <div class="assessment__nav">
         ${currentSectionIndex > 0 ? `<button class="btn btn--m btn--outline" id="nav-prev">Previous</button>` : ""}
         ${currentSectionIndex < sectionSteps.length - 1
@@ -141,12 +159,18 @@ document.addEventListener("DOMContentLoaded", () => {
   function saveCurrentAnswers() {
     document.querySelectorAll(".skill-card").forEach(card => {
       const key = card.dataset.skill;
+      if (!key) return;
       const radio = card.querySelector(`input[name="${key}"]:checked`);
       const notes = card.querySelector("textarea")?.value || "";
       answers[key] = {
         answer: radio ? radio.value : "",
         notes: notes
       };
+    });
+    // Save additional concern notes (stored by its textarea's data-key)
+    document.querySelectorAll(".concern-additional-notes textarea").forEach(ta => {
+      const key = ta.dataset.key;
+      if (key) answers[key] = { answer: "", notes: ta.value };
     });
     localStorage.setItem(`mdt-answers-${age}`, JSON.stringify(answers));
   }

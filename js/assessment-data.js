@@ -30,7 +30,8 @@ const CATEGORIES = [
   { id: "stand", title: "Stand", icon: "stand", category: "Stand" },
   { id: "walk", title: "Walk", icon: "walk", category: "Walk" },
   { id: "climb", title: "Climb", icon: "climb", category: "Climb" },
-  { id: "run", title: "Run", icon: "run", category: "Run" }
+  { id: "run", title: "Run", icon: "run", category: "Run" },
+  { id: "concerns", title: "Concerns", icon: "eye", category: "Concerns" }
 ];
 
 const MASTER_SKILLS = [
@@ -111,6 +112,7 @@ const ALL_STEPS = [
   { id: "walk", label: "Walk", icon: "walk" },
   { id: "climb", label: "Climb", icon: "climb" },
   { id: "run", label: "Run", icon: "run" },
+  { id: "concerns", label: "Concerns", icon: "eye" },
   { id: "summary", label: "Summary", icon: "summary" }
 ];
 
@@ -122,15 +124,17 @@ function getSkillsForAge(ageCode) {
 
   CATEGORIES.forEach(cat => {
     const catSkills = MASTER_SKILLS.filter(s => s.skillCategory === cat.category);
+    const isAllAges = (age) => age === "Any age" || age === "all ages";
+
     const hasAgeSpecific = catSkills.some(s =>
-      s.age !== "Any age" && SKILL_AGE_MONTHS[s.age] <= maxMonths
+      !isAllAges(s.age) && SKILL_AGE_MONTHS[s.age] <= maxMonths
     );
-    const isAlwaysShow = catSkills.every(s => s.age === "Any age");
+    const isAlwaysShow = catSkills.every(s => isAllAges(s.age));
 
     if (!hasAgeSpecific && !isAlwaysShow) return;
 
     const skills = catSkills
-      .filter(s => s.age === "Any age" || SKILL_AGE_MONTHS[s.age] <= maxMonths)
+      .filter(s => isAllAges(s.age) || SKILL_AGE_MONTHS[s.age] <= maxMonths)
       .map(s => ({
         id: slugify(s.skillName),
         name: s.skillName,

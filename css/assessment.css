@@ -253,6 +253,23 @@
   color: #b0aeb5;
 }
 
+.skill-card__icon {
+  width: 64px;
+  height: 64px;
+  display: block;
+  margin: 0 auto;
+  opacity: 0.6;
+}
+
+.concern-additional-notes {
+  margin-top: var(--space-8);
+}
+
+.concern-additional-notes .skill-card__notes {
+  width: 100%;
+  min-height: 120px;
+}
+
 /* --- Radio Options --- */
 .skill-card__options {
   display: flex;

@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const saved = localStorage.getItem(`mdt-answers-${age}`);
   const answers = saved ? JSON.parse(saved) : {};
 
-  const flaggedAnswers = ["does-not", "used-to", "unsure"];
+  const flaggedAnswers = ["does-not", "used-to", "unsure", "has-concern"];
 
   const sectionMap = {};
   data.sections.forEach(section => {
@@ -80,10 +80,25 @@ document.addEventListener("DOMContentLoaded", () => {
     if (iconSrc) html += `<img class="summary__section-icon" src="${iconSrc}" alt="">`;
     html += `${section.title}</h3>`;
 
-    const grouped = { "does-not": [], "used-to": [], "unsure": [] };
+    const isConcernsSection = section.id === "concerns";
+    const grouped = isConcernsSection
+      ? { "has-concern": [], "unsure": [] }
+      : { "does-not": [], "used-to": [], "unsure": [] };
     items.forEach(item => {
-      grouped[item.answer].push(item);
+      if (grouped[item.answer] !== undefined) grouped[item.answer].push(item);
     });
+
+    // Show additional concern notes if present
+    if (isConcernsSection) {
+      const additionalKey = `${section.id}__additional-notes`;
+      const additionalEntry = answers[additionalKey];
+      if (additionalEntry?.notes?.trim()) {
+        html += `<div class="summary__skill summary__skill--additional-notes">`;
+        html += `<h4 class="summary__skill-name">Additional Concern Notes</h4>`;
+        html += `<p class="summary__skill-desc">${additionalEntry.notes}</p>`;
+        html += `</div>`;
+      }
+    }
 
     Object.entries(grouped).forEach(([answer, skills]) => {
       if (skills.length === 0) return;
@@ -91,20 +106,22 @@ document.addEventListener("DOMContentLoaded", () => {
       const badgeLabel = {
         "does-not": "Does not do",
         "used-to": "Used to do but no longer does",
-        "unsure": "Unsure"
+        "unsure": "Unsure",
+        "has-concern": "Has concern"
       }[answer];
 
       const badgeClass = {
         "does-not": "summary__badge--does-not",
         "used-to": "summary__badge--used-to",
-        "unsure": "summary__badge--unsure"
+        "unsure": "summary__badge--unsure",
+        "has-concern": "summary__badge--does-not"
       }[answer];
 
       html += `<span class="summary__badge ${badgeClass}">${badgeLabel}</span>`;
 
       skills.forEach(({ skill, notes, key }) => {
         html += `<div class="summary__skill">`;
-        html += `<h4 class="summary__skill-name">Skill: ${skill.name}</h4>`;
+        html += `<h4 class="summary__skill-name">${isConcernsSection ? "Concern" : "Skill"}: ${skill.name}</h4>`;
         html += `<p class="summary__skill-desc">${skill.description}</p>`;
 
         if (answer === "unsure") {
