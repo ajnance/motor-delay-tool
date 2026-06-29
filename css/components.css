@@ -147,6 +147,12 @@
   border-width: var(--border-m);
 }
 
+.age-input__error {
+  font-size: var(--type-scale-14);
+  color: #c0392b;
+  margin-bottom: var(--space-8);
+}
+
 /* --- Form Select --- */
 .form-select {
   display: block;

@@ -15,18 +15,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function getAgeCode() {
     const total = getTotalMonths();
-    if (total < 2 || total > 60) return null;
+    if (total < 2) return null;
 
+    const capped = Math.min(total, 60);
     let bracket = AGE_BRACKETS[0];
     for (const b of AGE_BRACKETS) {
-      if (b <= total) bracket = b;
+      if (b <= capped) bracket = b;
       else break;
     }
     return bracket + "m";
   }
 
   function updateStartBtn() {
-    startBtn.disabled = !getAgeCode();
+    const total = getTotalMonths();
+    startBtn.disabled = total < 1;
   }
 
   const savedAge = findSavedAge();
@@ -64,20 +66,28 @@ document.addEventListener("DOMContentLoaded", () => {
     ageYearsInput.addEventListener("input", updateStartBtn);
     ageMonthsInput.addEventListener("input", updateStartBtn);
 
+    const ageError = document.getElementById("age-error");
+
     startBtn.addEventListener("click", () => {
-      const code = getAgeCode();
-      if (code) {
-        const total = getTotalMonths();
-        const years = Math.floor(total / 12);
-        const months = total % 12;
-        let label;
-        if (years > 0 && months > 0) label = `${years} year${years !== 1 ? "s" : ""} ${months} month${months !== 1 ? "s" : ""}`;
-        else if (years > 0) label = `${years} year${years !== 1 ? "s" : ""}`;
-        else label = `${months} month${months !== 1 ? "s" : ""}`;
-        localStorage.setItem("mdt-user-age", JSON.stringify({ label }));
-        window.location.href = `assessment.html?age=${encodeURIComponent(code)}`;
+      const total = getTotalMonths();
+      if (total < 2) {
+        ageError.style.display = "";
+        return;
       }
+      ageError.style.display = "none";
+      const code = getAgeCode();
+      const years = Math.floor(total / 12);
+      const months = total % 12;
+      let label;
+      if (years > 0 && months > 0) label = `${years} year${years !== 1 ? "s" : ""} ${months} month${months !== 1 ? "s" : ""}`;
+      else if (years > 0) label = `${years} year${years !== 1 ? "s" : ""}`;
+      else label = `${months} month${months !== 1 ? "s" : ""}`;
+      localStorage.setItem("mdt-user-age", JSON.stringify({ label }));
+      window.location.href = `assessment.html?age=${encodeURIComponent(code)}`;
     });
+
+    ageYearsInput.addEventListener("input", () => { ageError.style.display = "none"; });
+    ageMonthsInput.addEventListener("input", () => { ageError.style.display = "none"; });
   }
 
   function findSavedAge() {
