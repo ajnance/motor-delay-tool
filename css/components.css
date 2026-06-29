@@ -235,7 +235,7 @@
 }
 
 .site-header__logo-img {
-  width: 300px;
+  width: 275px;
   height: auto;
 }
 
@@ -251,7 +251,29 @@
 .site-header__desktop-actions {
   display: flex;
   align-items: center;
-  gap: var(--space-16);
+  gap: var(--space-32);
+}
+
+.site-header__auth {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  font-family: var(--type-font-main);
+  font-size: var(--type-scale-14);
+  color: var(--text-body-default);
+}
+
+.site-header__auth a {
+  color: var(--text-body-default);
+  text-decoration: none;
+}
+
+.site-header__auth a:hover {
+  text-decoration: underline;
+}
+
+.site-header__auth-divider {
+  color: var(--text-body-muted);
 }
 
 .site-header__utility-right {

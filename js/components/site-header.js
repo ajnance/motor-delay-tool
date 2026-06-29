@@ -21,6 +21,11 @@ function renderSiteHeader(rootPath = "") {
           <img src="${rootPath}assets/logo-healthychildren.png" alt="HealthyChildren.org" class="site-header__logo-img">
         </a>
         <div class="site-header__desktop-actions">
+          <div class="site-header__auth">
+            <a href="#">Login</a>
+            <span class="site-header__auth-divider">|</span>
+            <a href="#">Register</a>
+          </div>
           <button class="site-header__lang">${globe} English ${chevron}</button>
           <a href="#" class="site-header__donate">${heart} Donate</a>
           <button class="site-header__search" aria-label="Search">${search}</button>
