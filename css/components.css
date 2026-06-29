@@ -329,7 +329,7 @@
 .sub-header__inner {
   max-width: var(--breakpoints-width);
   margin: 0 auto;
-  padding: var(--space-12) var(--space-64);
+  padding: 4px var(--space-64);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -353,8 +353,8 @@
 }
 
 .sub-header__seal {
-  width: 32px;
-  height: 32px;
+  width: 48px;
+  height: 48px;
   object-fit: contain;
 }
 
