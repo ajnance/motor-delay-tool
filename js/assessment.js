@@ -64,9 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
       </label>`).join("");
 
     const placeholderSvg = `<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#b0aeb5" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>`;
-    const rightContent = isConcern
-      ? `<img src="assets/eye.svg" alt="" class="skill-card__icon">`
-      : `<div class="image-placeholder">${placeholderSvg}</div>`;
+    const rightContent = `<div class="image-placeholder">${placeholderSvg}</div>`;
 
     return `
       <div class="skill-card" data-skill="${key}">
@@ -99,9 +97,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const savedConcernNotes = answers[`${section.id}__additional-notes`]?.notes || "";
     const additionalNotesHtml = section.id === "concerns" ? `
       <div class="skill-card concern-additional-notes">
-        <h4 class="skill-card__title">Additional Concern Notes for the Pediatrician</h4>
-        <p class="skill-card__desc">Use this space to share any other concerns about your child's movement or development that you'd like your pediatrician to know about.</p>
-        <textarea class="skill-card__notes" data-key="${section.id}__additional-notes" placeholder="Add any additional notes here...">${savedConcernNotes}</textarea>
+        <div class="skill-card__layout">
+          <div class="skill-card__left">
+            <h4 class="skill-card__title">Additional Concern Notes for the Pediatrician</h4>
+            <p class="skill-card__desc">Use this space to share any other concerns about your child's movement or development that you'd like your pediatrician to know about.</p>
+            <textarea class="skill-card__notes" data-key="${section.id}__additional-notes" placeholder="Add any additional notes here...">${savedConcernNotes}</textarea>
+          </div>
+          <div class="skill-card__right"></div>
+        </div>
       </div>` : "";
 
     container.innerHTML = `
