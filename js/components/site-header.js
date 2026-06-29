@@ -18,7 +18,7 @@ function renderSiteHeader(rootPath = "") {
       </div>
       <div class="site-header__main-row">
         <a href="${rootPath}index.html" class="site-header__logo">
-          <img src="${rootPath}assets/logo-healthychidren.png" alt="HealthyChildren.org" class="site-header__logo-img">
+          <img src="${rootPath}assets/logo-healthychildren.png" alt="HealthyChildren.org" class="site-header__logo-img">
         </a>
         <div class="site-header__desktop-actions">
           <button class="site-header__lang">${globe} English ${chevron}</button>
@@ -45,7 +45,7 @@ function renderSiteHeader(rootPath = "") {
         <span class="sub-header__tagline">Powered by pediatricians. Trusted by parents.</span>
         <div class="sub-header__aap">
           <span>from the <a href="#">American Academy of Pediatrics</a></span>
-          <img src="${rootPath}assets/seal-AAP.png" alt="AAP Seal" class="sub-header__seal">
+          <img src="${rootPath}assets/seal-AAP.svg" alt="AAP Seal" class="sub-header__seal">
         </div>
       </div>
     </div>`;

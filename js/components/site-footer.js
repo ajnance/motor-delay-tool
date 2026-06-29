@@ -29,7 +29,7 @@ function renderSiteFooter(rootPath = "") {
       <div class="site-footer__top">
         <div class="site-footer__top-inner">
           <a href="${rootPath}index.html" class="site-footer__logo">
-            <img src="${rootPath}assets/logo-healthychidren.png" alt="HealthyChildren.org" class="site-footer__logo-img">
+            <img src="${rootPath}assets/logo-healthychildren.png" alt="HealthyChildren.org" class="site-footer__logo-img">
           </a>
           <div class="site-footer__social">
             ${socialHtml}
